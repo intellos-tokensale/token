@@ -46,10 +46,15 @@ contract('StandardToken', function([_, owner, recipient, anotherAccount]) {
                     });
 
                     it('approves the requested amount and replaces the previous one', async function() {
+                        await this.token.approve(spender, 0, { from: owner });
                         await this.token.approve(spender, amount, { from: owner });
 
                         const allowance = await this.token.allowance(owner, spender);
                         assert.equal(allowance, amount);
+                    });
+
+                    it('fails to approve the requested amount because not reset to 0', async function() {
+                        await assertRevert(this.token.approve(spender, amount, { from: owner }));
                     });
                 });
             });
@@ -76,16 +81,22 @@ contract('StandardToken', function([_, owner, recipient, anotherAccount]) {
                     });
                 });
 
-                describe('when the spender had an approved amount', function() {
+                describe('when the spender had an approved amount and reset to 0', function() {
                     beforeEach(async function() {
                         await this.token.approve(spender, 1, { from: owner });
+
                     });
 
                     it('approves the requested amount and replaces the previous one', async function() {
+                        await this.token.approve(spender, 0, { from: owner });
                         await this.token.approve(spender, amount, { from: owner });
 
                         const allowance = await this.token.allowance(owner, spender);
                         assert.equal(allowance, amount);
+                    });
+
+                    it('fails to approve the requested amount because not reset to 0', async function() {
+                        await assertRevert(this.token.approve(spender, amount, { from: owner }));
                     });
                 });
             });
