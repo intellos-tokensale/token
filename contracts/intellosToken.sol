@@ -13,7 +13,7 @@ import "./token/ERC223/MintableToken.sol";
 contract IntellosToken is MintableToken {
 
   string public constant name = "Intellos Token"; 
-  string public constant symbol = "ITL"; 
+  string public constant symbol = "ITX"; 
   uint8 public constant decimals = 18; 
 
 }

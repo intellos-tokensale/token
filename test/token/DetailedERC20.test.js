@@ -10,7 +10,7 @@ contract('DetailedERC20', accounts => {
     let detailedERC20 = null;
 
     const _name = 'Intellos Token';
-    const _symbol = 'ITL';
+    const _symbol = 'ITX';
     const _decimals = 18;
 
     beforeEach(async function() {
